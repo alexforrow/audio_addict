@@ -58,6 +58,20 @@ module AudioAddict
       log_like track if (direction == :up) && Config.like_log
     end
 
+    def images
+      properties['images']
+    end
+
+    def listen_urls
+      @listen_urls ||= listen_urls!
+    end
+
+    def listen_urls!
+      response = cache.get "#{radio.network}/listen_urls/#{key}"  do
+        radio.api.get "listen/premium/#{key}"
+      end
+    end
+
   private
 
     def log_like(track = nil)
