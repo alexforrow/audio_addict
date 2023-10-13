@@ -67,7 +67,7 @@ module AudioAddict
     end
 
     def listen_urls!
-      response = cache.get "#{radio.network}/listen_urls/#{key}"  do
+      cache.get "#{radio.network}/listen_urls/#{key}"  do
         radio.api.get "listen/premium/#{key}"
       end
     end
